@@ -1,0 +1,27 @@
+{
+  "name": "natours_express",
+  "version": "1.0.0",
+  "description": "Learning node js with express and mongoose together with authentication using JWT",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JibranAdvany/natours_express.git"
+  },
+  "keywords": [
+    "Mongoose",
+    "Express",
+    "Node"
+  ],
+  "author": "Jibran Advani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JibranAdvany/natours_express/issues"
+  },
+  "homepage": "https://github.com/JibranAdvany/natours_express#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
