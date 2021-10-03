@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords provided do not match.',
     },
   },
+  passwordChangedAt: Date,
 });
 
 // Encrypting the passwords. User passwords must not be saved as plain text (MOST IMPORTANT RULE)
@@ -51,6 +52,21 @@ userSchema.methods.correctPassword = async function (
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+// checking if user password has changed (for JWT)
+userSchema.methods.changedPasswordAfter = function (JWTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+
+    return JWTimestamp < changedTimestamp;
+  }
+
+  // Means not changed...token remains valid
+  return false;
 };
 
 const User = mongoose.model('User', userSchema);

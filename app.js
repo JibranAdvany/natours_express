@@ -21,6 +21,11 @@ app.use(express.json());
 //   console.log('Hello from the middleware 🔥');
 //   next();
 // });
+app.use((req, res, next) => {
+  console.log(req.headers);
+
+  next();
+});
 
 // Third-party middleware
 if (process.env.NODE_ENV == 'development') {
