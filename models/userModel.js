@@ -40,6 +40,11 @@ const userSchema = new mongoose.Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 });
 
 // Encrypting the passwords. User passwords must not be saved as plain text (MOST IMPORTANT RULE)
@@ -96,6 +101,13 @@ userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+// To hide deleted users
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: { $ne: false } });
+
   next();
 });
 
