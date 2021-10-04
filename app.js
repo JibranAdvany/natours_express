@@ -7,6 +7,7 @@ const xss = require('xss-clean'); // protects against malicious HTML attacks
 const hpp = require('hpp'); // protects against parameter pollution
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 
@@ -72,6 +73,7 @@ if (process.env.NODE_ENV == 'development') {
 // Routing middle ware
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 // catch-all route
 app.all('*', (req, res, next) => {
