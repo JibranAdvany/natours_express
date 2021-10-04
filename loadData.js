@@ -16,7 +16,7 @@ mongoose.connect(dbLink, () => {
 
 // Reading the file (JSON)
 const tours = JSON.parse(
-  fs.readFileSync('./dev-data/data/tours-simple.json', 'utf-8')
+  fs.readFileSync('./dev-data/data/tours.json', 'utf-8')
 );
 
 // Import data to Mongo
