@@ -116,6 +116,11 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
+// Indexing
+// tourSchema.index({ price: 1 });
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+
 // Virtual properties - can not be called in a query.
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
