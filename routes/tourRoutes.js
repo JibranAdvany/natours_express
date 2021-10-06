@@ -19,6 +19,14 @@ router
   );
 
 router
+  .route('/tours-within/:distance/center/:latlang/unit/:unit')
+  .get(tourControllers.getToursWithin);
+
+router
+  .route('/distances/:latlang/unit/:unit')
+  .get(tourControllers.getDistances);
+
+router
   .route('/')
   .get(tourControllers.getAllTours)
   .post(

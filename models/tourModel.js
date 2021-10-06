@@ -121,6 +121,7 @@ const tourSchema = new mongoose.Schema(
 // tourSchema.index({ price: 1 });
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
+tourSchema.index({ startLocation: '2dsphere' });
 
 // Virtual properties - can not be called in a query.
 tourSchema.virtual('durationWeeks').get(function () {
@@ -182,11 +183,11 @@ tourSchema.pre(/^find/, function (next) {
 // });
 
 // AGGREGATE MIDDLEWARE
-tourSchema.pre('aggregate', function (next) {
-  this.pipeline().unshift({ $match: { secret: { $ne: true } } });
+// tourSchema.pre('aggregate', function (next) {
+//   this.pipeline().unshift({ $match: { secret: { $ne: true } } });
 
-  next();
-});
+//   next();
+// });
 
 const Tour = mongoose.model('Tour', tourSchema);
 
