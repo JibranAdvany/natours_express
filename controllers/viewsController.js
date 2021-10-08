@@ -21,8 +21,11 @@ exports.getTour = catchAsync(async (req, res) => {
   });
 
   // 2. Build and render the template using data from step 1
-  res.status(200).render('tour', {
-    title: 'The Forest Hiker Tour',
-    tour,
-  });
+  res
+    .set('Content-Security-Policy', "default-src-elem 'https://api.mapbox.com'")
+    .status(200)
+    .render('tour', {
+      title: `${tour.name} tour`,
+      tour,
+    });
 });
