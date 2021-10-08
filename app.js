@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit'); // to protect against DOS attacks
@@ -8,11 +9,16 @@ const hpp = require('hpp'); // protects against parameter pollution
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const viewRouter = require('./routes/viewRoutes');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 
 // Initializing express app
 const app = express();
+
+// View engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 
@@ -20,7 +26,7 @@ const app = express();
 app.use(helmet());
 
 // Serving static assets
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Reading body data
 app.use(express.json({ limit: '10kb' }));
@@ -71,6 +77,7 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 // Routing middle ware
+app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
