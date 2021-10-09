@@ -12,6 +12,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
+const cookieParser = require('cookie-parser');
 
 // Initializing express app
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Reading body data
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 // Data sanitization middleware (against no sql query injection and against CSS attacks)
 app.use(mongoSanitize());
@@ -57,11 +59,11 @@ app.use(
 //   next();
 // });
 
-// app.use((req, res, next) => {
-//   console.log(req.headers);
+app.use((req, res, next) => {
+  console.log(req.cookies);
 
-//   next();
-// });
+  next();
+});
 
 // Third-party middleware
 // LIMITER
