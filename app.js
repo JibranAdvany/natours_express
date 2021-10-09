@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Reading body data
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // Data sanitization middleware (against no sql query injection and against CSS attacks)
