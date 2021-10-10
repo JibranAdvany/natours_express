@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit'); // to protect against DOS attacks
 const helmet = require('helmet'); // secured HTTP headers
@@ -61,7 +62,7 @@ app.use(
 // });
 
 app.use((req, res, next) => {
-  console.log(req.cookies);
+  // console.log(req.cookies);
 
   next();
 });
