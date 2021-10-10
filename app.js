@@ -19,6 +19,7 @@ const compression = require('compression');
 
 // Initializing express app
 const app = express();
+app.enable('trust proxy');
 
 // View engine
 app.set('view engine', 'pug');
