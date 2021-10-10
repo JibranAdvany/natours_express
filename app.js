@@ -15,6 +15,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 // Initializing express app
 const app = express();
@@ -67,6 +68,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use(compression());
 
 // Third-party middleware
 // LIMITER
