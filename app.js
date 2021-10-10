@@ -43,7 +43,7 @@ app.use(mongoSanitize());
 // XSS
 app.use(xss());
 
-// Parameter Pollution Preventor
+// Parameter Pollution Prevent
 app.use(
   hpp({
     whitelist: [
