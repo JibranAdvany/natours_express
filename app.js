@@ -16,6 +16,7 @@ const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 // Initializing express app
 const app = express();
@@ -26,6 +27,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+app.use(cors());
 
 // Helmet
 app.use(helmet());
