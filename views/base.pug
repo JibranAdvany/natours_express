@@ -9,7 +9,7 @@ html
       title Natours | #{title}
       link(rel="stylesheet", href="/css/style.css")
 
-  body
+  body(data-alert=`${alert ? alert : ''}`)
     // HEADER
     include _header
 
