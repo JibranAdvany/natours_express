@@ -12,6 +12,7 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const cookieParser = require('cookie-parser');
@@ -34,6 +35,13 @@ app.use(helmet());
 
 // Serving static assets
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Webhook
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 
 // Reading body data
 app.use(express.json({ limit: '10kb' }));
